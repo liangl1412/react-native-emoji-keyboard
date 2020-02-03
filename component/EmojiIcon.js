@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import {Text, StyleSheet, TouchableHighlight} from 'react-native';
 
 const styles = StyleSheet.create({
+    emojiTouch: {
+        paddingVertical: 5
+    },
     emoji: {
         textAlign: 'center',
-        height: 40
+        
     }
 });
 
@@ -17,11 +20,12 @@ const EmojiIcon = ({
     emojiSize
 }) => {
     const {code} = emoji;
+
     return (
         <TouchableHighlight
             underlayColor="#f1f1f1"
             style={styles.emojiTouch}
-            onLongPress={() => longPressEmoji(emoji)}
+            onLongPress={() => longPressEmoji ? longPressEmoji(emoji) : null}
             onPress={() => clickEmoji(emoji)}>
             <Text
                 style={[
