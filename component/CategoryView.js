@@ -11,9 +11,7 @@ const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
     categoryView: {
         position: 'relative',
-        flex: 1,
-        overflow: 'visible',
-        zIndex: -10
+        flex: 1
     },
     categoryPageView: {
         flex: 1,

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import MaIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
+import {isIphoneXorAbove} from '../utils';
 import {IconType} from '../constant';
 
 const {width} = Dimensions.get('window');
@@ -16,7 +17,8 @@ const styles = StyleSheet.create({
         height: 30,
         width: width,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        paddingLeft: isIphoneXorAbove() ? 15 : 5
     },
     scrollView: {
         flexDirection: 'row',

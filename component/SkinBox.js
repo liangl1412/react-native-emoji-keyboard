@@ -8,7 +8,6 @@ import EmojiIcon from './EmojiIcon';
 const styles = StyleSheet.create({
     skinBox: {
         flex: 1,
-        height: 40,
         position: 'absolute',
         top: 0,
         backgroundColor: '#EAEBEF',

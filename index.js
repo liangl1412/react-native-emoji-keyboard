@@ -4,7 +4,7 @@ import emojiSource from 'emoji-datasource';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-import {toEmoji} from './utils';
+import {toEmoji, isIphoneXorAbove} from './utils';
 import CategoryTabBar from './component/CategoryTabBar';
 import CategoryView from './component/CategoryView';
 import {defaultProps, IconType} from './constant';
@@ -14,13 +14,16 @@ const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#EAEBEF',
+        height: 'auto',
         width: width,
         position: 'absolute',
         zIndex: 10,
         overflow: 'visible',
         bottom: 0,
         left: 0,
-        right: 0
+        right: 0,
+        paddingTop: 10,
+        paddingBottom: isIphoneXorAbove() ? 15 : 0
     }
 });
 
@@ -42,8 +45,8 @@ const EmojiPicker = ({
     tabBarStyle,
     labelStyle
 }) => {
-    // emoji height + label + categoryBar
-    const containerHeight = numCols * 40 + 40 + 30;
+    // emoji board offset + label + categoryBar + extraSpace
+    const animationOffset = numCols * 40 + 40 + 30 + 100;
 
     const [emojiData, setEmojiData] = useState(null);
     useEffect(() => {
@@ -66,7 +69,7 @@ const EmojiPicker = ({
     }, [blackList]);
 
     const [position] = useState(
-        new Animated.Value(showEmoji ? 0 : -containerHeight)
+        new Animated.Value(showEmoji ? 0 : -animationOffset)
     );
     useEffect(() => {
         if (showEmoji) {
@@ -77,10 +80,10 @@ const EmojiPicker = ({
         } else {
             Animated.timing(position, {
                 duration: 300,
-                toValue: -containerHeight
+                toValue: -animationOffset
             }).start();
         }
-    }, [showEmoji, position, containerHeight]);
+    }, [showEmoji, position, animationOffset]);
 
     if (!emojiData) {
         return null;
@@ -107,7 +110,7 @@ const EmojiPicker = ({
         <Animated.View
             style={[
                 styles.container,
-                {bottom: position, height: containerHeight},
+                {bottom: position},
                 containerStyle
             ]}>
             <ScrollableTabView
