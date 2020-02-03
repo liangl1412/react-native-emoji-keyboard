@@ -1,0 +1,44 @@
+{
+    "name": "react-native-emoji-keyboard",
+    "version": "1.0.0",
+    "description": "A React Native emoji keyboard/picker component for both Android and ios",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/liangl1412/react-native-emoji-keyboard.git"
+    },
+    "keywords": [
+        "react",
+        "native",
+        "react-native",
+        "emoji",
+        "skin-tone",
+        "component",
+        "keyboard",
+        "Android",
+        "ios"
+    ],
+    "author": "Yi Zhou",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/liangl1412/react-native-emoji-keyboard/issues"
+    },
+    "homepage": "https://github.com/liangl1412/react-native-emoji-keyboard#readme",
+    "dependencies": {
+        "@react-native-community/viewpager": "^3.3.0",
+        "emoji-datasource": "^5.0.1",
+        "lodash": "^4.17.15",
+        "prop-types": "^15.7.2",
+        "react": "16.9.0",
+        "react-native": "0.61.2",
+        "react-native-scrollable-tab-view": "^1.0.0",
+        "react-native-vector-icons": "^6.6.0",
+        "string.fromcodepoint": "^0.2.1"
+    },
+    "jest": {
+        "preset": "react-native"
+    }
+}
