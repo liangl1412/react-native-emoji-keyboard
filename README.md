@@ -1,4 +1,5 @@
-# React Native Emoji Board
+# React Native Emoji Board 
+[![npm version](https://badge.fury.io/js/react-native-emoji-board.svg)](https://badge.fury.io/js/react-native-emoji-board)
 
 React Native Emoji Board is a customizable component similar to native keyboard but only with emoji for both iOS and Android. You can use this component as a keyboard input or emoji picker.
 
