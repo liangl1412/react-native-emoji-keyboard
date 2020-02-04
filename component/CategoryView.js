@@ -107,7 +107,6 @@ const CategoryView = ({
         }
         return categoryView;
     };
-    console.log(toggleSkinBox.emoji);
     return (
         <View tabLabel={category} style={styles.categoryView}>
             {toggleSkinBox.showSkinBox && (
