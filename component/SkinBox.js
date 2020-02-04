@@ -1,8 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
-import {toEmoji} from '../utils';
 import EmojiIcon from './EmojiIcon';
 
 const styles = StyleSheet.create({
@@ -10,6 +8,7 @@ const styles = StyleSheet.create({
         flex: 1,
         position: 'absolute',
         top: 0,
+        height: 40,
         backgroundColor: '#EAEBEF',
         zIndex: 9999,
         flexDirection: 'row',
@@ -24,13 +23,7 @@ const SkinBox = ({emoji, ...props}) => {
         return null;
     }
     const defaultSkin = {code, name};
-    const skinEmojis = _.toArray(skins).map(skin => {
-        return {
-            code: toEmoji(skin.unified),
-            name
-        };
-    });
-    skinEmojis.push(defaultSkin);
+    const skinEmojis = [defaultSkin, ...skins];
     return (
         <View style={styles.skinBox}>
             {skinEmojis.map((value, key) => {

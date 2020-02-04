@@ -4,7 +4,12 @@ import emojiSource from 'emoji-datasource';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-import {toEmoji, isIphoneXorAbove} from './utils';
+import {
+    isIphoneXorAbove,
+    isAndroid,
+    handleDefaultEmoji,
+    handleCustomEmoji
+} from './utils';
 import CategoryTabBar from './component/CategoryTabBar';
 import CategoryView from './component/CategoryView';
 import {defaultProps, IconType} from './constant';
@@ -14,7 +19,6 @@ const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#EAEBEF',
-        height: 'auto',
         width: width,
         position: 'absolute',
         zIndex: 10,
@@ -22,16 +26,16 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        paddingTop: 10,
         paddingBottom: isIphoneXorAbove() ? 15 : 0
     }
 });
 
-const EmojiPicker = ({
-    showEmoji = false,
+const EmojiBoard = ({
+    showBoard = false,
+    customEmoji = [],
     categories = defaultProps.categories,
     blackList = defaultProps.blackList,
-    perPage = 40,
+    numRows = 8,
     numCols = 5,
     emojiSize = 24,
     onClick,
@@ -41,38 +45,30 @@ const EmojiPicker = ({
     categoryDefautColor = '#aaa',
     categoryHighlightColor = '#000',
     categoryIconSize = 20,
-    containerStyle,
-    tabBarStyle,
-    labelStyle
+    containerStyle = {},
+    tabBarStyle = {},
+    labelStyle = {}
 }) => {
-    // emoji board offset + label + categoryBar + extraSpace
-    const animationOffset = numCols * 40 + 40 + 30 + 100;
+    // emoji board height only for android
+    const containerHeight = numCols * 40 + 40 + 40;
+    const animationOffset = containerHeight + 100;
 
     const [emojiData, setEmojiData] = useState(null);
     useEffect(() => {
-        const filteredData = emojiSource.filter(
-            e => !_.includes(blackList, e.short_name)
-        );
-        const sortedData = _.orderBy(filteredData, 'sort_order');
-        const groupedData = _.groupBy(sortedData, 'category');
-
-        const transformData = _.mapValues(groupedData, group =>
-            group.map(value => {
-                return {
-                    code: toEmoji(value.unified),
-                    name: value.short_name,
-                    skins: value.skin_variations || null
-                };
-            })
-        );
-        setEmojiData(Object.assign({}, transformData));
-    }, [blackList]);
+        let data;
+        if (customEmoji.length) {
+            data = handleCustomEmoji(customEmoji, blackList);
+        } else {
+            data = handleDefaultEmoji(emojiSource, blackList);
+        }
+        setEmojiData(Object.assign({}, data));
+    }, []);
 
     const [position] = useState(
-        new Animated.Value(showEmoji ? 0 : -animationOffset)
+        new Animated.Value(showBoard ? 0 : -animationOffset)
     );
     useEffect(() => {
-        if (showEmoji) {
+        if (showBoard) {
             Animated.timing(position, {
                 duration: 300,
                 toValue: 0
@@ -83,7 +79,7 @@ const EmojiPicker = ({
                 toValue: -animationOffset
             }).start();
         }
-    }, [showEmoji, position, animationOffset]);
+    }, [showBoard, position, animationOffset]);
 
     if (!emojiData) {
         return null;
@@ -94,8 +90,8 @@ const EmojiPicker = ({
         groupsView.push(
             <CategoryView
                 category={name}
-                emojis={emojiData[name]}
-                perPage={perPage}
+                emojis={emojiData[name] || []}
+                numRows={numRows}
                 numCols={numCols}
                 emojiSize={emojiSize}
                 key={name}
@@ -110,7 +106,10 @@ const EmojiPicker = ({
         <Animated.View
             style={[
                 styles.container,
-                {bottom: position},
+                {
+                    bottom: position,
+                    height: isAndroid() ? containerHeight : 'auto'
+                },
                 containerStyle
             ]}>
             <ScrollableTabView
@@ -134,8 +133,18 @@ const EmojiPicker = ({
     );
 };
 
-EmojiPicker.propTypes = {
-    showEmoji: PropTypes.bool,
+EmojiBoard.propTypes = {
+    showBoard: PropTypes.bool,
+    customEmoji: PropTypes.arrayOf(
+        PropTypes.shape({
+            code: PropTypes.string,
+            img: PropTypes.string,
+            name: PropTypes.string,
+            category: PropTypes.string,
+            sort_order: PropTypes.number,
+            skins: PropTypes.array
+        })
+    ),
     categories: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string,
@@ -147,7 +156,7 @@ EmojiPicker.propTypes = {
         })
     ),
     blackList: PropTypes.array,
-    perPage: PropTypes.number,
+    numRows: PropTypes.number,
     numCols: PropTypes.number,
     emojiSize: PropTypes.number,
     onClick: PropTypes.func.isRequired,
@@ -162,4 +171,4 @@ EmojiPicker.propTypes = {
     labelStyle: PropTypes.object
 };
 
-export default EmojiPicker;
+export default EmojiBoard;

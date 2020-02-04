@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 const CategoryView = ({
     category,
     emojis,
-    perPage,
+    numRows,
     numCols,
     emojiSize,
     labelStyle,
@@ -43,10 +43,9 @@ const CategoryView = ({
         showSkinBox: false,
         emoji: null
     });
-
-    const perRow = perPage / numCols;
-    const emojiWidth = (width - 20) / perRow;
-
+    // Emoji count per page
+    const perPage = numRows * numCols;
+    const emojiWidth = (width - 20) / numRows;
     const clickEmoji = emoji => {
         setToggleSkinBox({
             showSkinBox: false,
@@ -76,7 +75,7 @@ const CategoryView = ({
 
     const renderCategory = () => {
         if (!emojis.length) {
-            return null;
+            return <View />;
         }
         const pages = Math.ceil(emojis.length / perPage);
         const categoryView = [];
@@ -108,6 +107,7 @@ const CategoryView = ({
         }
         return categoryView;
     };
+    console.log(toggleSkinBox.emoji);
     return (
         <View tabLabel={category} style={styles.categoryView}>
             {toggleSkinBox.showSkinBox && (

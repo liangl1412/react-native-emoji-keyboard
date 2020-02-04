@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Text, StyleSheet, TouchableHighlight} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 const styles = StyleSheet.create({
     emojiTouch: {
-        paddingVertical: 5
+        paddingVertical: 5,
+        height: 40,
+        justifyContent: 'center'
     },
     emoji: {
-        textAlign: 'center',
-        
+        textAlign: 'center'
+    },
+    emojiImg: {
+        alignSelf: 'center',
+        resizeMode: 'cover'
     }
 });
 
@@ -19,25 +24,17 @@ const EmojiIcon = ({
     emojiWidth,
     emojiSize
 }) => {
-    const {code} = emoji;
-
+    const {code, img} = emoji;
     return (
-        <TouchableHighlight
-            underlayColor="#f1f1f1"
-            style={styles.emojiTouch}
-            onLongPress={() => longPressEmoji ? longPressEmoji(emoji) : null}
+        <TouchableOpacity
+            style={[styles.emojiTouch, {width: emojiWidth}]}
+            onLongPress={() => (longPressEmoji ? longPressEmoji(emoji) : null)}
             onPress={() => clickEmoji(emoji)}>
-            <Text
-                style={[
-                    styles.emoji,
-                    {
-                        width: emojiWidth,
-                        fontSize: emojiSize
-                    }
-                ]}>
-                {code}
-            </Text>
-        </TouchableHighlight>
+            {code ?
+                <Text style={[styles.emoji, {fontSize: emojiSize}]}>{code}</Text> :
+                <Image source={{uri: img}} style={[styles.emojiImg, {width: emojiSize, height: emojiSize}]} />
+            }
+        </TouchableOpacity>
     );
 };
 
