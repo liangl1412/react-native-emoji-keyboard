@@ -28,7 +28,7 @@ React Native Emoji Board is a customizable component similar to native keyboard 
 | --------------------------------- | -------------------------------------------------------------------------------- | ---------- | -------------- |
 | **`showBoard`**                   | Show or hide Emoji board with animation                               | boolean     | false     |
 | **`customEmoji`**                  | See [Custom Emoji](#custom-emojis)                                | array     | [] |
-| **`categories`**                  | Default full categories from [emoji-datasource](https://www.npmjs.com/package/emoji-datasource)                                | array     | See [defaultProps.categories](./constant.js#L7) |
+| **`categories`**                  | Default full categories from [emoji-datasource](https://www.npmjs.com/package/emoji-datasource)                                | array     | See [defaultProps.categories](https://github.com/liangl1412/react-native-emoji-keyboard/blob/master/constant.js#L7) |
 | **`blackList`**                   | Exclude emojis based on `short_name`                                      | array     | []        |
 | **`numRows`**                     | Number of emoji rows to display per slide                                              | number     | 40   |
 | **`numCols`**                     | Number of emoji columns to display per slide                                               | number     | 5              |
@@ -50,7 +50,7 @@ React Native Emoji Board is a customizable component similar to native keyboard 
 | Prop                              | Description                                                                      | type       |
 | --------------------------------- | -------------------------------------------------------------------------------- | ---------- |
 | **`name`**                   | Category name                               | string     |
-| **`iconType`**                   | Only support `MaterialCommunityIcons` and `FontAwesome`, you can use defined [iconType](./constant.js#L1)                               | string     |
+| **`iconType`**                   | Only support `MaterialCommunityIcons` and `FontAwesome`, you can use defined [iconType](https://github.com/liangl1412/react-native-emoji-keyboard/blob/master/constant.js#L1)                               | string     |
 | **`icon`**                   | Icon/Font name, you can find list from [here](https://oblador.github.io/react-native-vector-icons/)                               | string     |
 
 
