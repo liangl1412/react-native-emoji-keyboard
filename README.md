@@ -2,7 +2,7 @@
 
 React Native Emoji Board is a customizable component similar to native keyboard but only with emoji for both iOS and Android. You can use this component as a keyboard input or emoji picker.
 
-![Emoji Board](demo/demo.gif)
+![Emoji Board](https://github.com/liangl1412/react-native-emoji-keyboard/blob/master/demo/demo.gif?raw=true)
 
 
 ## Installation
@@ -12,13 +12,17 @@ React Native Emoji Board is a customizable component similar to native keyboard 
 3.  `react-native link @react-native-community/viewpager`
 
 
-## Required Props
+## Props
+
+### Required Props
 
 | Prop              | Description                      | type     |
 | ----------------- | -------------------------------- | -------- |
 | **`onClick`** | Call back function when you clciked on emoji | function |
 
-## Optional Props
+<br/>
+
+### Optional Props
 
 | Prop                              | Description                                                                      | type       | default value  |
 | --------------------------------- | -------------------------------------------------------------------------------- | ---------- | -------------- |
@@ -38,6 +42,8 @@ React Native Emoji Board is a customizable component similar to native keyboard 
 | **`tabBarStyle`**                 | Category bar style, same as [Layout Props](https://facebook.github.io/react-native/docs/0.9/layout-props)                | object    | {}        |
 | **`labelStyle`**                  | Category label style, same as [Text Props](https://facebook.github.io/react-native/docs/0.9/text-style-props)                      | object    | {}          |
 | **`onRemove`**                    | Call back function when backspace get clicked | function | null             |
+
+<br/>
 
 **If you want to support less category or modify the icon, here is the categories props:**
 
