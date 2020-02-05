@@ -41,7 +41,7 @@ Autolinking will just do the job.
 | **`customEmoji`**                  | See [Custom Emoji](#custom-emojis)                                | array     | [] |
 | **`categories`**                  | Default full categories from [emoji-datasource](https://www.npmjs.com/package/emoji-datasource)                                | array     | See [defaultProps.categories](https://github.com/liangl1412/react-native-emoji-keyboard/blob/master/constant.js#L7) |
 | **`blackList`**                   | Exclude emojis based on `short_name`                                      | array     | []        |
-| **`numRows`**                     | Number of emoji rows to display per slide                                              | number     | 40   |
+| **`numRows`**                     | Number of emoji rows to display per slide                                              | number     | 8   |
 | **`numCols`**                     | Number of emoji columns to display per slide                                               | number     | 5              |
 | **`emojiSize`**                   | Default emoji size                                                    | number     | 24             |
 | **`tabBarPosition`**              | Default category nav position                                             | string     |'bottom' |
