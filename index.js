@@ -71,12 +71,14 @@ const EmojiBoard = ({
         if (showBoard) {
             Animated.timing(position, {
                 duration: 300,
-                toValue: 0
+                toValue: 0,
+                useNativeDriver: false
             }).start();
         } else {
             Animated.timing(position, {
                 duration: 300,
-                toValue: -animationOffset
+                toValue: -animationOffset,
+                useNativeDriver: false
             }).start();
         }
     }, [showBoard, position, animationOffset]);
