@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     emoji: {
-        textAlign: 'center'
+        textAlign: 'center',
+        color:'#000'
     },
     emojiImg: {
         alignSelf: 'center',
